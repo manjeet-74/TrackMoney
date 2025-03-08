@@ -61,3 +61,5 @@ export class transactionService {
     }
   }
 }
+
+export const transactionServices = new transactionService();
