@@ -6,7 +6,7 @@ import Login from "./pages/Login"
 function App() {
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="">
       <Routes>
         <Route path="/" element={<Home />} />"
         <Route path="/login" element={<Login />} />
