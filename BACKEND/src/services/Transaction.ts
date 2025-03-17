@@ -3,7 +3,9 @@ import { ITransaction, Transaction } from "src/models/Transaction";
 export class transactionService {
   async createTransaction(data: ITransaction) {
     try {
+      console.log("window to create a transaction")
       const newTransaction = await Transaction.create(data);
+      console.log("newT", newTransaction)
       return newTransaction;
     } catch (error: unknown) {
       console.log(error);

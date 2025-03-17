@@ -9,7 +9,7 @@ export const TransactionSchemaValidate = Joi.object({
   description: Joi.string().required(),
 });
 
-export interface ITransaction extends Document {
+export interface ITransaction {
   type: string;
   category: string;
   amount: number;

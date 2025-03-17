@@ -8,7 +8,7 @@ class transactionController {
       type: req.body.type,
       category: req.body.category,
       amount: req.body.amount,
-      date: req.body.date,
+      date: Date(),
       description: req.body.description,
     };
 
@@ -19,6 +19,8 @@ class transactionController {
       res.send(error.message);
     } else {
       const transaction = await transactionServices.createTransaction(value);
+      console.log("1st point")
+      console.log(transaction)
       res.status(201).send(transaction);
     }
   };

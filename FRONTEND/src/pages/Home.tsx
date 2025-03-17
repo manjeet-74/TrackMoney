@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Budget } from "../components/Budget";
 import { Header } from "../components/Header";
 import { Hero } from "../components/Hero";
+import { makeTransaction } from "../utils/api";
 
 export const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [transaction, setTransaction] = useState({
         type: "expense",
-        amount: ""
+        amount: "",
+        category: "random",
+        description: "Let's keep it random for now"
     })
 
     const openModal = () => {
@@ -18,14 +21,26 @@ export const Home = () => {
         setIsModalOpen(false)
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         console.log("Transaction Type:", transaction.type);
         console.log("Amount:", transaction.amount);
+        const res = await makeTransaction(transaction)
+        console.log(res)
+        setTransaction({
+            type: "expense",
+            amount: "",
+            category: "random",
+            description: "Let's keep it random for now"
+        })
+
+        alert("Transaction made successfully!")
         // You can also reset the form fields after submission if needed
         setTransaction({
             type: transaction.type,
-            amount: transaction.amount
+            amount: transaction.amount,
+            category: transaction.category,
+            description: transaction.description
         });
         closeModal(); // Close the modal after submission
     };
@@ -49,7 +64,9 @@ export const Home = () => {
                                         value={transaction.type}
                                         onChange={(e) => setTransaction({
                                             type: e.target.value,
-                                            amount: transaction.amount
+                                            amount: transaction.amount,
+                                            category: transaction.category,
+                                            description: transaction.description
                                         })}
                                     >
                                         <option value="income">Income</option>
@@ -66,7 +83,9 @@ export const Home = () => {
                                     value={transaction.amount}
                                     onChange={(e) => setTransaction({
                                         type: transaction.type,
-                                        amount: e.target.value
+                                        amount: e.target.value,
+                                        category: transaction.category,
+                                        description: transaction.description
                                     })}
                                 />
                                 <button type="submit" className="mt-4 w-full bg-green-600 text-white py-2 rounded-md hover:bg-[#8c62e4] transition-colors">

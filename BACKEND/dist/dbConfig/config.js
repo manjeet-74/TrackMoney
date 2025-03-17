@@ -13,14 +13,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
-const dotenv_1 = __importDefault(require("dotenv"));
+const dotenv_flow_1 = __importDefault(require("dotenv-flow"));
 const mongoose_1 = __importDefault(require("mongoose"));
-dotenv_1.default.config();
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/express-mongo";
+dotenv_flow_1.default.config();
+const MONGO_URI = process.env.MONGO_URI;
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    if (!MONGO_URI) {
+        throw new Error("MONGO_URI not written");
+    }
     try {
-        yield mongoose_1.default.connect(MONGO_URI);
-        console.log("MongoDB connected successfully!");
+        console.log(MONGO_URI);
+        // mongoose.set("strictQuery", false);
+        const db = yield mongoose_1.default.connect(MONGO_URI);
+        if (db) {
+            console.log("MongoDB connected successfully!");
+        }
+        else {
+            console.log("Error connecting to database");
+        }
     }
     catch (error) {
         console.error("MongoDB connection failed: ", error);
