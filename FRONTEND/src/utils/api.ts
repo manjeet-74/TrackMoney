@@ -38,3 +38,17 @@ export const getAllTransactions = async () => {
     throw error;
   }
 };
+
+export const getTypeTransactions = async (type: string) => {
+  try {
+    const typeTransactions = await API.get("/transaction/type", {
+      params: { type },
+    });
+    console.log(typeTransactions);
+    return typeTransactions;
+  } catch (error: unknown) {
+    if (error instanceof Error)
+      console.log("transaction failed!.....", error.message);
+    throw error;
+  }
+};

@@ -3,9 +3,9 @@ import { ITransaction, Transaction } from "src/models/Transaction";
 export class transactionService {
   async createTransaction(data: ITransaction) {
     try {
-      console.log("window to create a transaction")
+      console.log("window to create a transaction");
       const newTransaction = await Transaction.create(data);
-      console.log("newT", newTransaction)
+      console.log("newT", newTransaction);
       return newTransaction;
     } catch (error: unknown) {
       console.log(error);
@@ -15,6 +15,18 @@ export class transactionService {
   async getTransactions() {
     try {
       const transactions = await Transaction.find();
+      return transactions;
+    } catch (error: unknown) {
+      console.log(error);
+    }
+  }
+
+  async getTypeTransaction(type: string) {
+    try {
+      const transactions = await Transaction.find({ type: type });
+      if (!transactions) {
+        return `No transaction in ${type}`;
+      }
       return transactions;
     } catch (error: unknown) {
       console.log(error);

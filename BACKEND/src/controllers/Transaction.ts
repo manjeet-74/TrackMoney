@@ -19,8 +19,8 @@ class transactionController {
       res.send(error.message);
     } else {
       const transaction = await transactionServices.createTransaction(value);
-      console.log("1st point")
-      console.log(transaction)
+      console.log("1st point");
+      console.log(transaction);
       res.status(201).send(transaction);
     }
   };
@@ -29,6 +29,12 @@ class transactionController {
   getTransactions = async (req: Request, res: Response) => {
     const transactions = await transactionServices.getTransactions();
     res.send(transactions);
+  };
+
+  getTypeTransactions = async (req: Request, res: Response) => {
+    const { type } = req.body;
+    const typeTransaction = await transactionServices.getTypeTransaction(type);
+    res.send(typeTransaction);
   };
 
   //get a single transaction

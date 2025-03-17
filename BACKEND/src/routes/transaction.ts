@@ -8,6 +8,8 @@ transactionRoute
   .post(TransactionController.addTransaction)
   .get(TransactionController.getTransactions);
 
+transactionRoute.route("/type").get(TransactionController.getTypeTransactions);
+
 transactionRoute
   .route("/:id")
   .get(TransactionController.getATransaction)

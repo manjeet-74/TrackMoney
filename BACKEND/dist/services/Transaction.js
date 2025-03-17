@@ -36,6 +36,20 @@ class transactionService {
             }
         });
     }
+    getTypeTransaction(type) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const transactions = yield Transaction_1.Transaction.find({ type: type });
+                if (!transactions) {
+                    return `No transaction in ${type}`;
+                }
+                return transactions;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
     getTransaction(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

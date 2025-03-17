@@ -39,6 +39,11 @@ class transactionController {
             const transactions = yield Transaction_2.transactionServices.getTransactions();
             res.send(transactions);
         });
+        this.getTypeTransactions = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { type } = req.body;
+            const typeTransaction = yield Transaction_2.transactionServices.getTypeTransaction(type);
+            res.send(typeTransaction);
+        });
         //get a single transaction
         this.getATransaction = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = req.params.id;
